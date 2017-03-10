@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load urlify %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+    {{instance.title}} | {{block.super}}
+{% endblock head_title %}
+
+{% block content %}
+
+<div>
+    <div>
+        <h1>Confirm delete comment</h1>
+         <form action="." method="POST">
+            {% csrf_token %}
+            <h3><p>Are you sure want to delete?</p></h3>
+             <blockquote>
+                 <p>{{object.content}}</p>
+             </blockquote>
+            <input type="submit" value="Confirm" class="btn btn-warning" />
+            <a href="{{object.get_absolute_url}}" class="btn btn-default">Cancel</a>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

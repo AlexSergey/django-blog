@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block head_title %}Blog{% endblock head_title %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <!--head_extra - this is block for JS and CSS from Django widgets-->
+    {% block head_extra %}{% endblock head_extra %}
+</head>
+<body>
+    {% include 'messages.html' %}
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="{% url 'posts:list' %}">Home</a></li>
+            {% block post_detail_link %}
+            {% endblock %}
+            {% if not request.user.is_authenticated %}
+                <li class="pull-right"><a href="{% url 'register' %}">Register</a></li>
+                <li class="pull-right"><a href="{% url 'login' %}">Login</a></li>
+            {% else %}
+                <li class="pull-right"><a href="{% url 'logout' %}">Logout</a></li>
+            {% endif %}
+        </ol>
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <script src="{% static 'js/jquery-3.1.1.js' %}"></script>
+    <script src="{% static 'js/marked.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/marked.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
