@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'pagedown',
     'markdown_deux',
     'crispy_forms',
-    'rest_framework',
+    'rest_framework'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -59,6 +59,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middlewares.user.ProfileMiddleware',
 ]
 
 LOGIN_URL = '/login/'
